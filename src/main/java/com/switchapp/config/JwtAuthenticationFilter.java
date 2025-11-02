@@ -61,7 +61,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
             }
-            logger.info("To check SimpleGrantedAuthority: {}", authorities);
+
+            if (authorities.isEmpty()) {
+                authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+            }
+
+            logger.info("Checking SimpleGrantedAuthority with default role (ROLE_USER) if no roles are assigned: {}", authorities);
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.switchapp.model.Role;
 import com.switchapp.model.User;
 import com.switchapp.service.UserServiceImpl;
@@ -22,8 +23,9 @@ public class ConvertUtils {
 
     public static ObjectMapper mapper = new ObjectMapper();
 
-    public static String convertObjectToJson(Object obj) {
 
+    public static String convertObjectToJson(Object obj) {
+        mapper.registerModule(new JavaTimeModule());
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
@@ -32,20 +34,14 @@ public class ConvertUtils {
         try {
             if (obj instanceof Object) {
                 json = mapper.writeValueAsString(obj);
-                // json =
-                // mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
             } else if (obj instanceof List) {
                 List<String> listOfStr = new ArrayList<String>();
                 for (Object objeach : (List) obj) {
                     json = mapper.writeValueAsString(obj);
-//					json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
                     listOfStr.add(json);
                 }
                 return listOfStr.toString();
             }
-            // json =
-            // mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-            // log.info("Resulting JSON string from Obejct : \n" + json);
             return json;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -56,14 +52,8 @@ public class ConvertUtils {
     }
 
     public static UserDto userDtoFromUser(User user) {
-
         UserDto userDTO = new UserDto();
         BeanUtils.copyProperties(user, userDTO);
-        userDTO.setRoles(
-                user.getRoles().stream()
-                        .map(Role::getName)
-                        .collect(Collectors.toList())
-        );
         return userDTO;
     }
 }

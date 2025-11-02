@@ -1,9 +1,11 @@
 package com.switchapp.util;
 
+import com.switchapp.model.Role;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class UserDto {
@@ -11,5 +13,11 @@ public class UserDto {
     private String email;
     private boolean enabled;
     private LocalDateTime createdDt;
-    private List<String> roles;
+    private Set<Role> roles;
+    private String firstname;
+    private String lastname;
+    private String phonenumber;
+    private LocalDateTime lastloginDt;
+    private LocalDate dateofbirthDt;
+    private String gender;
 }

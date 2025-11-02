@@ -3,6 +3,7 @@ package com.switchapp.service;
 import com.switchapp.model.User;
 import com.switchapp.util.SignupRequest;
 import com.switchapp.util.UserDto;
+import com.switchapp.util.UserException;
 
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,13 @@ public interface UserService {
 
     User createUser(User user);
 
-    List<UserDto> getAllUsers(String email, Boolean enabled);
+    List<UserDto> getAllUsers();
 
     Optional<UserDto> getUserByUsername(String username);
 
-    Optional<UserDto> updateUser(String username, User user);
+    Optional<UserDto> updateUser(String username, UserDto user);
 
     boolean deleteUser(String username);
+
+    boolean resetPassword(String username, String newPassword);
 }
