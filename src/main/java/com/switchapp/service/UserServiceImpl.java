@@ -6,7 +6,7 @@ import com.switchapp.repository.RoleRepository;
 import com.switchapp.repository.UserRepository;
 import com.switchapp.util.ConvertUtils;
 import com.switchapp.util.SignupRequest;
-import com.switchapp.util.UserDto;
+import com.switchapp.dto.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +78,12 @@ public class UserServiceImpl implements UserService {
         user.setUsername(signupRequest.username);
         user.setEmail(signupRequest.email);
         user.setPassword(passwordEncoder.encode(signupRequest.password));
+        user.setFirstname(signupRequest.firstname);
+        user.setLastname(signupRequest.lastname);
+        user.setDisplayname(signupRequest.getDisplayname());
+        user.setPhonenumber(signupRequest.phonenumber);
+        user.setGender(signupRequest.gender);
+        user.setDateofbirthDt(signupRequest.dateofbirthDt);
 
         Set<Role> roles = new HashSet<>();
         if (signupRequest.roles == null) {
@@ -105,6 +111,7 @@ public class UserServiceImpl implements UserService {
         signupRequest.roles = user.getRoles() != null ? user.getRoles() : new HashSet<>();
         signupRequest.firstname = user.getFirstname();
         signupRequest.lastname = user.getLastname();
+        signupRequest.displayname = user.getDisplayname();
         signupRequest.phonenumber = user.getPhonenumber();
         signupRequest.gender = user.getGender();
         signupRequest.lastloginDt = user.getLastloginDt();
@@ -154,7 +161,14 @@ public class UserServiceImpl implements UserService {
             logger.info("Updated roles: {}", updatedRoles);
 
             existing.setRoles(updatedRoles);
+            existing.setFirstname(user.getFirstname());
+            existing.setLastname(user.getLastname());
+            existing.setDisplayname(user.getDisplayname());
+            existing.setPhonenumber(user.getPhonenumber());
+            existing.setGender(user.getGender());
+            existing.setDateofbirthDt(user.getDateofbirthDt());
             // Set other fields as needed
+
             return ConvertUtils.userDtoFromUser(userRepository.save(existing));
         });
     }

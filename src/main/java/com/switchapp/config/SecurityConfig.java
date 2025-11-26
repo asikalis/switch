@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/signup", "/api/v1/auth/login").permitAll()
+                        .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/v1/users/**").hasAnyRole("USER", "ADMIN", "GUEST", "MANAGER", "EDITOR", "MODERATOR") // Only ROLE_USER can access user APIs
                         .requestMatchers("/api/v1/users/*/reset-password").hasAnyRole("USER", "ADMIN", "MANAGER")
                         .requestMatchers("/api/v1/roles/*").hasAnyRole("ADMIN", "MANAGER")

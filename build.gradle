@@ -49,6 +49,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0'
     implementation 'commons-beanutils:commons-beanutils:1.11.0'
     implementation 'jakarta.validation:jakarta.validation-api:4.0.0-M1'
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
 //    implementation 'mysql:mysql-connector-j'
 

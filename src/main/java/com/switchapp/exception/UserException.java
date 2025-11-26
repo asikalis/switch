@@ -1,4 +1,4 @@
-package com.switchapp.util;
+package com.switchapp.exception;
 
 public class UserException extends Exception {
     public UserException(String message) {

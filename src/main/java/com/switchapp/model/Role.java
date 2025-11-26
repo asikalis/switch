@@ -24,7 +24,7 @@ public class Role {
     private String description;
 
     @Column(name = "created_dt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createdDt;
+    private LocalDateTime createdDt = LocalDateTime.now();
 
     public Role(String name) {
         this.name = name;

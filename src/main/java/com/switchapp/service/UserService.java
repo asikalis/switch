@@ -2,8 +2,7 @@ package com.switchapp.service;
 
 import com.switchapp.model.User;
 import com.switchapp.util.SignupRequest;
-import com.switchapp.util.UserDto;
-import com.switchapp.util.UserException;
+import com.switchapp.dto.UserDto;
 
 import java.util.List;
 import java.util.Map;

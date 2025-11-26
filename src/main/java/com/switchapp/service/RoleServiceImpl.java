@@ -30,12 +30,12 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role updateRole(Long id, Role role) {
-        Optional<Role> existing = roleRepository.findById(id);
+    public Role updateRole(String roleName, Role role) {
+        Optional<Role> existing = roleRepository.findByName(roleName);
         if (existing.isPresent()) {
             Role r = existing.get();
             r.setName(role.getName());
-            // update other fields as needed
+            r.setDescription(role.getDescription());
             return roleRepository.save(r);
         }
         return null;

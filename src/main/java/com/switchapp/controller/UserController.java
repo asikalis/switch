@@ -4,7 +4,7 @@ import com.switchapp.model.User;
 import com.switchapp.service.UserService;
 import com.switchapp.util.ResponseJson;
 import com.switchapp.util.RestUtil;
-import com.switchapp.util.UserDto;
+import com.switchapp.dto.UserDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.switchapp.config;
+package com.switchapp.exception;
 
 import com.switchapp.util.ResponseJson;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -34,6 +34,11 @@ public class GlobalExceptionHandler {
                 null
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ApiException.class)
+    public ResponseEntity<String> handleApiException(ApiException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
 }

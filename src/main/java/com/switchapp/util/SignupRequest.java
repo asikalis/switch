@@ -19,4 +19,5 @@ public class SignupRequest {
     public LocalDate dateofbirthDt;
     public String gender;
     public Set<Role> roles;
+    public String displayname;
 }

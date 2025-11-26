@@ -1,4 +1,4 @@
-package com.switchapp.util;
+package com.switchapp.dto;
 
 import com.switchapp.model.Role;
 import lombok.Data;
@@ -20,4 +20,5 @@ public class UserDto {
     private LocalDateTime lastloginDt;
     private LocalDate dateofbirthDt;
     private String gender;
+    private String displayname;
 }

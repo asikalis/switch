@@ -1,5 +1,6 @@
 package com.switchapp.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,6 +34,9 @@ public class User {
 
     @Column(nullable = true)
     private String lastname;
+
+    @Column(nullable = true)
+    private String displayname;
 
     @Column(nullable = true)
     private String phonenumber;
@@ -65,4 +70,21 @@ public class User {
             createdDt = LocalDateTime.now();
         }
     }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Business> businesses;
 }
+
+/*
+| Column     | Type                          | Description           |
+| ---------- | ----------------------------- | --------------------- |
+| id         | BIGINT (PK)                   | Unique user ID        |
+| username   | VARCHAR(50)                   | Login username        |
+| password   | VARCHAR(255)                  | Encrypted password    |
+| full_name  | VARCHAR(100)                  | User's full name      |
+| email      | VARCHAR(100)                  | Contact email         |
+| role       | ENUM('ADMIN','OWNER','STAFF') | Role of user          |
+| created_at | TIMESTAMP                     | Account creation date |
+*/
+

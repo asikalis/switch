@@ -41,9 +41,9 @@ public class RoleController {
         return RestUtil.response(HttpStatus.CREATED, "Role created", created);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseJson> updateRole(@PathVariable Long id, @RequestBody Role role) {
-        Role updated = roleService.updateRole(id, role);
+    @PutMapping("/{roleName}")
+    public ResponseEntity<ResponseJson> updateRole(@PathVariable String roleName, @RequestBody Role role) {
+        Role updated = roleService.updateRole(roleName, role);
         if (updated != null) {
             return RestUtil.response(HttpStatus.OK, "Role updated", updated);
         }
